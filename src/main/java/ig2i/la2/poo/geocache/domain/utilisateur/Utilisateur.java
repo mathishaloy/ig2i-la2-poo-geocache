@@ -1,4 +1,4 @@
-package ig2i.la2.poo.geocache.domain.user;
+package ig2i.la2.poo.geocache.domain.utilisateur;
 
 
 import ig2i.la2.poo.geocache.domain.cache.Cache;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Builder
-public class User {
+public class Utilisateur {
     private String id;
     private String pseudo;
     private String description;

@@ -6,7 +6,6 @@ import ig2i.la2.poo.geocache.domain.cache.CacheService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -17,7 +16,6 @@ public class CacheServiceImpl implements CacheService {
 
     @Override
     public Cache findGeocache(String id) {
-        System.out.println(LocalDateTime.now());
         return Optional.ofNullable(cacheRepository.findGeocache(id))
                 .orElseThrow(() -> new RuntimeException("Geocache " + id + " cannot be found"));
     }

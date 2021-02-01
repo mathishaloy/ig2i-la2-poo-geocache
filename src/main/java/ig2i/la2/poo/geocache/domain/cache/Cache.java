@@ -1,6 +1,6 @@
 package ig2i.la2.poo.geocache.domain.cache;
 
-import ig2i.la2.poo.geocache.domain.user.User;
+import ig2i.la2.poo.geocache.domain.utilisateur.Utilisateur;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,5 +17,5 @@ public class Cache {
     private Nature nature;
     private Etat etat;
 
-    private User user;
+    private Utilisateur utilisateur;
 }

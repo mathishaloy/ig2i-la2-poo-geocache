@@ -5,8 +5,10 @@ import ig2i.la2.poo.geocache.infrastructure.mysql.CacheEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
+import org.springframework.stereotype.Component;
 
-@Mapper(componentModel = "spring")
+@Mapper
+@Component
 public interface CacheMapper {
 
     @Mappings({

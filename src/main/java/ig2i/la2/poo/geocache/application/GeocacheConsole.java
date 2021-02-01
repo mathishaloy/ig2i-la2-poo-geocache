@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 @Component
@@ -18,6 +19,9 @@ public class GeocacheConsole implements CommandLineRunner {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello there ! Tu veux quelle geocache bg ?");
         String id = scanner.nextLine();
+
+        System.out.println("Lancement : " + LocalDateTime.now());
         System.out.println(cacheService.findGeocache(id));
+        System.out.println("Fin : " + LocalDateTime.now());
     }
 }
