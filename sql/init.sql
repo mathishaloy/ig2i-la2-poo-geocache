@@ -1,4 +1,15 @@
+DROP TABLE IF EXISTS visite;
+
 DROP TABLE IF EXISTS cache;
+
+DROP TABLE IF EXISTS utilisateur;
+
+CREATE TABLE utilisateur
+(
+    id_utilisateur VARCHAR(36) PRIMARY KEY,
+    description    VARCHAR(256),
+    photo          VARCHAR(256)
+);
 
 CREATE TABLE cache
 (
@@ -12,9 +23,8 @@ CREATE TABLE cache
     etat           VARCHAR(32),
     CONSTRAINT cache_utilisateur_fk
         FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur)
+            ON UPDATE CASCADE ON DELETE CASCADE
 );
-
-DROP TABLE IF EXISTS visite;
 
 CREATE TABLE visite
 (
@@ -25,16 +35,9 @@ CREATE TABLE visite
     date           DATETIME,
     photo          VARCHAR(256),
     CONSTRAINT visite_cache_fk
-        FOREIGN KEY (id_cache) REFERENCES cache (id_cache),
+        FOREIGN KEY (id_cache) REFERENCES cache (id_cache)
+            ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT visite_utilisateur_fk
-        FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur),
-);
-
-DROP TABLE IF EXISTS utilisateur;
-
-CREATE TABLE utilisateur
-(
-    id_utilisateur VARCHAR(36) PRIMARY KEY,
-    description    VARCHAR(256),
-    photo          VARCHAR(256)
+        FOREIGN KEY (id_utilisateur) REFERENCES utilisateur (id_utilisateur)
+            ON UPDATE CASCADE ON DELETE CASCADE
 );
