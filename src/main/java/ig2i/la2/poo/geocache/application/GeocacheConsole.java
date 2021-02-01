@@ -1,6 +1,8 @@
 package ig2i.la2.poo.geocache.application;
 
 import ig2i.la2.poo.geocache.domain.cache.CacheService;
+import ig2i.la2.poo.geocache.domain.utilisateur.Utilisateur;
+import ig2i.la2.poo.geocache.domain.utilisateur.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ public class GeocacheConsole implements CommandLineRunner {
 
     private final CacheService cacheService;
 
+    private final UtilisateurRepository utilisateurRepository;
+
     @Override
     public void run(String... args) throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -21,7 +25,11 @@ public class GeocacheConsole implements CommandLineRunner {
         String id = scanner.nextLine();
 
         System.out.println("Lancement : " + LocalDateTime.now());
-        System.out.println(cacheService.findCacheById(id));
+//        System.out.println(cacheService.findCacheById(id));
+        Utilisateur utilisateur = utilisateurRepository.findUtilisateurById(id);
+
+        utilisateurRepository.save(utilisateur);
+
         System.out.println("Fin : " + LocalDateTime.now());
     }
 }

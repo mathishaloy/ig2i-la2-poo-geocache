@@ -1,17 +1,16 @@
 package ig2i.la2.poo.geocache.infrastructure.mysql.utilisateur;
 
-import ig2i.la2.poo.geocache.infrastructure.mysql.cache.CacheEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,8 +28,5 @@ public class UtilisateurEntity {
 
     @Column(name = "photo")
     private String photo;
-
-    @OneToMany(mappedBy = "proprietaire")
-    private List<CacheEntity> caches;
 
 }

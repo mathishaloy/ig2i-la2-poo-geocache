@@ -10,8 +10,8 @@ public class Cache {
     private String id;
     private String lieu;
 
-    private float latitude;
-    private float longitude;
+    private Float latitude;
+    private Float longitude;
 
     private Type type;
     private Nature nature;

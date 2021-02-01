@@ -4,15 +4,13 @@ import ig2i.la2.poo.geocache.domain.cache.Etat;
 import ig2i.la2.poo.geocache.domain.cache.Nature;
 import ig2i.la2.poo.geocache.domain.cache.Type;
 import ig2i.la2.poo.geocache.infrastructure.mysql.utilisateur.UtilisateurEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

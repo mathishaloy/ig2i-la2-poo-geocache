@@ -11,4 +11,13 @@ public abstract class UtilisateurMapper {
                 .photo(entity.getPhoto())
                 .build();
     }
+
+    public static UtilisateurEntity toEntity(Utilisateur utilisateur){
+        return UtilisateurEntity.builder()
+                .id(utilisateur.getId())
+                .description(utilisateur.getDescription())
+                .pseudo(utilisateur.getPseudo())
+                .photo(utilisateur.getPhoto())
+                .build();
+    }
 }
