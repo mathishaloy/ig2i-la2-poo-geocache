@@ -9,18 +9,16 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ig2i.la2.poo</groupId>
-    <artifactId>geocache</artifactId>
+    <artifactId>cache</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>geocache</name>
+    <name>cache</name>
     <description>POO Project</description>
     <properties>
         <java.version>11</java.version>
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+
+        <!--SGBD DRIVERS-->
 
         <dependency>
             <groupId>mysql</groupId>
@@ -32,15 +30,28 @@
             <artifactId>mariadb-java-client</artifactId>
             <version>2.7.1</version>
         </dependency>
+
+        <!-- EXTERNAL DEPENDENCIES -->
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.4.1.Final</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
     </dependencies>
 

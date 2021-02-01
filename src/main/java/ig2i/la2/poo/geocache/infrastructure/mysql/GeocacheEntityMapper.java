@@ -1,18 +1,18 @@
 package ig2i.la2.poo.geocache.infrastructure.mysql;
 
-import ig2i.la2.poo.geocache.domain.Geocache;
+import ig2i.la2.poo.geocache.domain.cache.Cache;
 
 public abstract class GeocacheEntityMapper {
 
-    public static Geocache toDomain(CacheEntity entity){
-        return Geocache.builder()
+    public static Cache toDomain(CacheEntity entity){
+        return Cache.builder()
                 .id(entity.getId())
                 .build();
     }
 
-    public static CacheEntity toEntity(Geocache geocache){
+    public static CacheEntity toEntity(Cache cache){
         return CacheEntity.builder()
-                .id(geocache.getId())
+                .id(cache.getId())
                 .build();
     }
 
