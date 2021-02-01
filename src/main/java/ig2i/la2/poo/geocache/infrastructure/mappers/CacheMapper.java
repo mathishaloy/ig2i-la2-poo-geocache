@@ -1,7 +1,7 @@
 package ig2i.la2.poo.geocache.infrastructure.mappers;
 
 import ig2i.la2.poo.geocache.domain.cache.Cache;
-import ig2i.la2.poo.geocache.infrastructure.mysql.CacheEntity;
+import ig2i.la2.poo.geocache.infrastructure.mysql.cache.CacheEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

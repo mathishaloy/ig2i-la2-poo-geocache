@@ -17,5 +17,5 @@ public class Cache {
     private Nature nature;
     private Etat etat;
 
-    private Utilisateur utilisateur;
+    private Utilisateur proprietaire;
 }

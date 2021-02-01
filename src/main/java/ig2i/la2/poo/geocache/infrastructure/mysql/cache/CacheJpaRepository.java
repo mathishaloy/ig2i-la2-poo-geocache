@@ -1,4 +1,4 @@
-package ig2i.la2.poo.geocache.infrastructure.mysql;
+package ig2i.la2.poo.geocache.infrastructure.mysql.cache;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package ig2i.la2.poo.geocache.infrastructure.mysql;
+package ig2i.la2.poo.geocache.infrastructure.mysql.cache;
 
 import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.domain.cache.CacheRepository;
@@ -17,7 +17,7 @@ public class CacheRepositoryImpl implements CacheRepository {
     public Cache findGeocache(String id) {
 
         return Optional.ofNullable(cacheJpaRepository.getCacheEntityById(id))
-                .map(GeocacheEntityMapper::toDomain)
+                .map(CacheEntityMapper::toDomain)
                 .orElse(null);
 
     }
