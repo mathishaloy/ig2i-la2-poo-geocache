@@ -14,7 +14,7 @@ public class CacheRepositoryImpl implements CacheRepository {
     private final CacheJpaRepository cacheJpaRepository;
 
     @Override
-    public Cache findGeocache(String id) {
+    public Cache findCacheById(String id) {
 
         return Optional.ofNullable(cacheJpaRepository.getCacheEntityById(id))
                 .map(CacheEntityMapper::toDomain)

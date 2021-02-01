@@ -21,7 +21,7 @@ public class GeocacheConsole implements CommandLineRunner {
         String id = scanner.nextLine();
 
         System.out.println("Lancement : " + LocalDateTime.now());
-        System.out.println(cacheService.findGeocache(id));
+        System.out.println(cacheService.findCacheById(id));
         System.out.println("Fin : " + LocalDateTime.now());
     }
 }

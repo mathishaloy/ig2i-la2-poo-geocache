@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS utilisateur;
 CREATE TABLE utilisateur
 (
     id_utilisateur VARCHAR(36) PRIMARY KEY,
+    pseudo         VARCHAR(32),
     description    VARCHAR(256),
     photo          VARCHAR(256)
 );
@@ -16,8 +17,8 @@ CREATE TABLE cache
     id_cache       VARCHAR(36) PRIMARY KEY,
     id_utilisateur VARCHAR(36),
     lieu           VARCHAR(256) NOT NULL,
-    latitude       FLOAT NULL,
-    longitude      FLOAT NULL,
+    latitude       FLOAT        NULL,
+    longitude      FLOAT        NULL,
     type           VARCHAR(32),
     nature         VARCHAR(32),
     etat           VARCHAR(32),

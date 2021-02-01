@@ -15,8 +15,8 @@ public class CacheServiceImpl implements CacheService {
     private final CacheRepository cacheRepository;
 
     @Override
-    public Cache findGeocache(String id) {
-        return Optional.ofNullable(cacheRepository.findGeocache(id))
+    public Cache findCacheById(String id) {
+        return Optional.ofNullable(cacheRepository.findCacheById(id))
                 .orElseThrow(() -> new RuntimeException("Geocache " + id + " cannot be found"));
     }
 }

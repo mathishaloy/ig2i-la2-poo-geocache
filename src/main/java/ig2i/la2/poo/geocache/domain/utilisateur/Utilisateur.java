@@ -13,6 +13,7 @@ public class Utilisateur {
     private String id;
     private String pseudo;
     private String description;
+    private String photo;
 
     private List<Cache> caches;
 }

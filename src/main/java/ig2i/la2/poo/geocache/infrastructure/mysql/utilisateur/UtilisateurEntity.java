@@ -21,6 +21,9 @@ public class UtilisateurEntity {
     @Column(name = "id_utilisateur")
     private String id;
 
+    @Column(name = "pseudo")
+    private String pseudo;
+
     @Column(name = "description")
     private String description;
 
