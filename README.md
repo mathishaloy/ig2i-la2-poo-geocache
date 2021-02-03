@@ -29,4 +29,32 @@ Ainsi les classes métiers sont utilisées dans toutes les couches, la couche d'
 
 ![UML](CacheUML.png)
 
+## Lancer l'application
 
+### Maven
+
+Utiliser les commandes Maven `clean` et `install` depuis l'IDE ou depuis un terminal à la racine projet pour télécharger les dépendances du projet
+
+### Base de données
+
+#### MariaDB
+
+Configuration : 
+`src/main/resources/application.properties`
+```
+spring.datasource.url=jdbc:mariadb://localhost:3306/db_name
+spring.datasource.username=username
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+```
+
+Initialiser la base avec le fichier SQL suivant :
+`sql/init.sql`
+
+#### MySQL
+
+TODO
+
+#### MongoDB
+
+TODO
