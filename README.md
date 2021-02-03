@@ -1,6 +1,15 @@
 # IG2I-LA2-POO-GEOCACHE
 *Mathis Haloy - François Dourlens-Monchy*
 
+## Lancement
+
+A la racine du projet :
+
+```bash
+mvn clean install
+java -jar target/*.jar
+```
+
 ## Architecture
 
 ### UML et Métier
