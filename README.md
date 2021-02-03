@@ -1,7 +1,18 @@
 # IG2I-LA2-POO-GEOCACHE
 *Mathis Haloy - François Dourlens-Monchy*
 
+## Lancement
+
+A la racine du projet :
+
+```bash
+mvn clean install
+java -jar target/*.jar
+```
+
 ## Architecture
+
+### UML et Métier
 
 Notre projet possède l'arborescence suivante : 
 
@@ -29,32 +40,106 @@ Ainsi les classes métiers sont utilisées dans toutes les couches, la couche d'
 
 ![UML](CacheUML.png)
 
-## Lancer l'application
+### Springboot
 
-### Maven
+Dans ce nos projet nous avons utilisé le framework springboot qui permet de lancer l'application et de manipuler nos classes Java
+afin d'injecter les dépendances automatiquements. Globalement, quand on définit l'attribut `cacheService` suivant dans la classe ```GeocacheConsole```
+```java
+@Component
+@RequiredArgsConstructor
+public class GeocacheConsole implements CommandLineRunner {
 
-Utiliser les commandes Maven `clean` et `install` depuis l'IDE ou depuis un terminal à la racine projet pour télécharger les dépendances du projet
-
-### Base de données
-
-#### MariaDB
-
-Configuration : 
-`src/main/resources/application.properties`
+    private final CacheService cacheService;
+    
+    // ...
+}
 ```
-spring.datasource.url=jdbc:mariadb://localhost:3306/db_name
-spring.datasource.username=username
-spring.datasource.password=password
-spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+Alors sprinboot va scanner l'ensemble du projet afin de trouver une implémentation de cette interface ```CacheService```
+afin de l'y injecter. Rien de si magique puisque Spring va appeler le constructeur définit par l'annotation `@RequiredArgsConstructor` de lombok
+qui génère le code du constructeur au moment de la compilation comme suit :
+
+```java
+public GeocacheConsole(CacheService cacheService) {
+    this.cacheService = cacheService;
+}
+```
+Springboot va donc appeler ce constructeur au moment où il manipulera la classe `GeocacheConsole` en injectant l'implémentation
+de l'interface `CacheService`, dans le cas présent `CacheServiceImpl`. Spring reconnait cette implémentation grace à l'annotation
+`@Service` qu'elle possède : (`@Service`, `@Repository` et `@Component` servent à marquer une classe comme injectable)
+```java
+@Service
+@RequiredArgsConstructor
+public class CacheServiceImpl implements CacheService {
+
+    private final CacheRepository cacheRepository;
+    
+    // ...
+}
+```
+Etant donc manipulée par Spring, l'attribut `CacheRepository` de cette classe se verra donc injecté avec l'implémentation candidate aqéuate
+de la même manière que précedemment etc ...
+
+### Spring data jpa
+
+De la même manière que Sprinboot, Spring data JPA va nous aider et rajouter de l'abstraction dans la couche d'accès aux données.
+Dans le cas présent, pas de déclaration d'EntityManager à manipuler à la main. L'ensemble est géré par ce framework.
+
+Simplement en créant une interface, par exemple ici `CacheJpaRepository` qui étend `JpaRepository<T,ID>` :
+```java
+@Repository
+public interface CacheJpaRepository extends JpaRepository<CacheEntity, String> {
+}
+```
+nous avons déjà accès à un ensemble de méthode abstraite définies par le framework qui nous permettent d'accéder à la données, à savoir :
+
+```java
+public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+    List<T> findAll();
+
+    List<T> findAll(Sort var1);
+
+    List<T> findAllById(Iterable<ID> var1);
+
+    <S extends T> List<S> saveAll(Iterable<S> var1);
+
+    void flush();
+
+    <S extends T> S saveAndFlush(S var1);
+
+    void deleteInBatch(Iterable<T> var1);
+
+    void deleteAllInBatch();
+
+    T getOne(ID var1);
+
+    <S extends T> List<S> findAll(Example<S> var1);
+
+    <S extends T> List<S> findAll(Example<S> var1, Sort var2);
+}
 ```
 
-Initialiser la base avec le fichier SQL suivant :
-`sql/init.sql`
+Comme pour nos classes, spring injectera la bonne implémentation de l'interface `JpaRepository` en l'occurence la 
+suivante définit dans le framework et qui possède bien un `EntityManager` :
+```java
+public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID> {
+    private static final String ID_MUST_NOT_BE_NULL = "The given id must not be null!";
+    private final JpaEntityInformation<T, ?> entityInformation;
+    private final EntityManager em;
+    private final PersistenceProvider provider;
+    // ...
+}
+```
+> Comme quoi il n'y a vraiment rien de magique !
 
-#### MySQL
+Ce faisant, on a simplement besoin d'appeler la méthode `findAll();` qui nous retira la liste de `CacheEntity` correspondante
+à l'ensemble des caches stockées en base de données par exemple.
 
-TODO
+Les `JpaRepository` nous permettent aussi de répondre à des besoins plus spécifiques. Si on voulait faire une recherche
+de caches plus poussée, avec des conditions et un certain ordre par exemple, alors on a simplement besoin d'écrire notre
+méthode dans l'interface comme suit :
+```java
+List<CacheEntity> getCacheEntityByEtatAndNatureOrderByLatitudeDesc(Etat etat, Nature nature);
+```
 
-#### MongoDB
-
-TODO
+Ce faisant analyse le nom de cette méthode et comprend qu'on souhaite faire une recherche de cache par Etat et Nature,
+de manière Ordonée décroissante par la Latitude.
