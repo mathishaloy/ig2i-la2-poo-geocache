@@ -78,3 +78,68 @@ public class CacheServiceImpl implements CacheService {
 ```
 Etant donc manipulée par Spring, l'attribut `CacheRepository` de cette classe se verra donc injecté avec l'implémentation candidate aqéuate
 de la même manière que précedemment etc ...
+
+### Spring data jpa
+
+De la même manière que Sprinboot, Spring data JPA va nous aider et rajouter de l'abstraction dans la couche d'accès aux données.
+Dans le cas présent, pas de déclaration d'EntityManager à manipuler à la main. L'ensemble est géré par ce framework.
+
+Simplement en créant une interface, par exemple ici `CacheJpaRepository` qui étend `JpaRepository<T,ID>` :
+```java
+@Repository
+public interface CacheJpaRepository extends JpaRepository<CacheEntity, String> {
+}
+```
+nous avons déjà accès à un ensemble de méthode abstraite définies par le framework qui nous permettent d'accéder à la données, à savoir :
+
+```java
+public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+    List<T> findAll();
+
+    List<T> findAll(Sort var1);
+
+    List<T> findAllById(Iterable<ID> var1);
+
+    <S extends T> List<S> saveAll(Iterable<S> var1);
+
+    void flush();
+
+    <S extends T> S saveAndFlush(S var1);
+
+    void deleteInBatch(Iterable<T> var1);
+
+    void deleteAllInBatch();
+
+    T getOne(ID var1);
+
+    <S extends T> List<S> findAll(Example<S> var1);
+
+    <S extends T> List<S> findAll(Example<S> var1, Sort var2);
+}
+```
+
+Comme pour nos classes, spring injectera la bonne implémentation de l'interface `JpaRepository` en l'occurence la 
+suivante définit dans le framework et qui possède bien un `EntityManager` :
+```java
+public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T, ID> {
+    private static final String ID_MUST_NOT_BE_NULL = "The given id must not be null!";
+    private final JpaEntityInformation<T, ?> entityInformation;
+    private final EntityManager em;
+    private final PersistenceProvider provider;
+    // ...
+}
+```
+> Comme quoi il n'y a vraiment rien de magique !
+
+Ce faisant, on a simplement besoin d'appeler la méthode `findAll();` qui nous retira la liste de `CacheEntity` correspondante
+à l'ensemble des caches stockées en base de données par exemple.
+
+Les `JpaRepository` nous permettent aussi de répondre à des besoins plus spécifiques. Si on voulait faire une recherche
+de caches plus poussée, avec des conditions et un certain ordre par exemple, alors on a simplement besoin d'écrire notre
+méthode dans l'interface comme suit :
+```java
+List<CacheEntity> getCacheEntityByEtatAndNatureOrderByLatitudeDesc(Etat etat, Nature nature);
+```
+
+Ce faisant analyse le nom de cette méthode et comprend qu'on souhaite faire une recherche de cache par Etat et Nature,
+de manière Ordonée décroissante par la Latitude.
