@@ -3,6 +3,8 @@
 
 ## Architecture
 
+### UML et Métier
+
 Notre projet possède l'arborescence suivante : 
 
 ```
@@ -29,4 +31,41 @@ Ainsi les classes métiers sont utilisées dans toutes les couches, la couche d'
 
 ![UML](CacheUML.png)
 
+### Springboot
 
+Dans ce nos projet nous avons utilisé le framework springboot qui permet de lancer l'application et de manipuler nos classes Java
+afin d'injecter les dépendances automatiquements. Globalement, quand on définit l'attribut `cacheService` suivant dans la classe ```GeocacheConsole```
+```java
+@Component
+@RequiredArgsConstructor
+public class GeocacheConsole implements CommandLineRunner {
+
+    private final CacheService cacheService;
+    
+    // ...
+}
+```
+Alors sprinboot va scanner l'ensemble du projet afin de trouver une implémentation de cette interface ```CacheService```
+afin de l'y injecter. Rien de si magique puisque Spring va appeler le constructeur définit par l'annotation `@RequiredArgsConstructor` de lombok
+qui génère le code du constructeur au moment de la compilation comme suit :
+
+```java
+public GeocacheConsole(CacheService cacheService) {
+    this.cacheService = cacheService;
+}
+```
+Springboot va donc appeler ce constructeur au moment où il manipulera la classe `GeocacheConsole` en injectant l'implémentation
+de l'interface `CacheService`, dans le cas présent `CacheServiceImpl`. Spring reconnait cette implémentation grace à l'annotation
+`@Service` qu'elle possède : (`@Service`, `@Repository` et `@Component` servent à marquer une classe comme injectable)
+```java
+@Service
+@RequiredArgsConstructor
+public class CacheServiceImpl implements CacheService {
+
+    private final CacheRepository cacheRepository;
+    
+    // ...
+}
+```
+Etant donc manipulée par Spring, l'attribut `CacheRepository` de cette classe se verra donc injecté avec l'implémentation candidate aqéuate
+de la même manière que précedemment etc ...
