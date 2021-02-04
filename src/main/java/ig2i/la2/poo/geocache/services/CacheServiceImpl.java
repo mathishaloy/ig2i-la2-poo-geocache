@@ -46,6 +46,23 @@ public class CacheServiceImpl implements CacheService {
     }
 
     @Override
+    public Request testFindAll() {
+        List<Cache> caches;
+        LocalDateTime launch;
+        LocalDateTime end;
+
+        launch = LocalDateTime.now();
+        caches = cacheRepository.findAll();
+        end = LocalDateTime.now();
+
+        return Request.builder()
+                .launchTime(launch)
+                .result(caches)
+                .endTime(end)
+                .build();
+    }
+
+    @Override
     public Request testAddCaches(int number) {
 
         LocalDateTime launch;
