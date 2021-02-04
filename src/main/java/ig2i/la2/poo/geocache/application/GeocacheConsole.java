@@ -19,8 +19,8 @@ public class GeocacheConsole implements CommandLineRunner {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Liste des commandes :");
-            System.out.println("\t- get [object] id");
-            System.out.println("\t- add [object] number");
+            System.out.println("\t- get [object] [id]|all");
+            System.out.println("\t- add [object] [number]");
             System.out.println("Saisissez votre commande :");
             String command = scanner.nextLine();
 
