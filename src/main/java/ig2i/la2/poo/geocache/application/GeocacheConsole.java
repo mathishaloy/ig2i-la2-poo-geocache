@@ -1,13 +1,12 @@
 package ig2i.la2.poo.geocache.application;
 
+import ig2i.la2.poo.geocache.domain.Request;
 import ig2i.la2.poo.geocache.domain.cache.CacheService;
-import ig2i.la2.poo.geocache.domain.utilisateur.Utilisateur;
 import ig2i.la2.poo.geocache.domain.utilisateur.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 @Component
@@ -24,12 +23,8 @@ public class GeocacheConsole implements CommandLineRunner {
         System.out.println("Hello there ! Tu veux quelle geocache bg ?");
         String id = scanner.nextLine();
 
-        System.out.println("Lancement : " + LocalDateTime.now());
-//        System.out.println(cacheService.findCacheById(id));
-        Utilisateur utilisateur = utilisateurRepository.findUtilisateurById(id);
+        Request request = cacheService.testFindCacheById(id);
+        System.out.println(request.toString());
 
-        utilisateurRepository.save(utilisateur);
-
-        System.out.println("Fin : " + LocalDateTime.now());
     }
 }
