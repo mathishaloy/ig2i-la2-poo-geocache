@@ -7,19 +7,26 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
 @Profile("mongodb")
 public class CacheRepositoryImplMongo implements CacheRepository {
+
+    private final CacheMongoRepository cacheMongoRepository;
+
+
     @Override
     public Cache findCacheById(String id) {
-        return null;
+        return cacheMongoRepository.findById(id)
+                .map(CacheMongoMapper::toDomain)
+                .orElse(null);
     }
 
     @Override
     public void saveAll(List<Cache> caches) {
-
+        cacheMongoRepository.saveAll(caches.stream().map(CacheMongoMapper::toMongo).collect(Collectors.toList()));
     }
 
     @Override
