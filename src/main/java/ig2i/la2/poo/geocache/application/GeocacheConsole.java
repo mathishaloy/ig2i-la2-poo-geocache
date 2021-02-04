@@ -21,9 +21,9 @@ public class GeocacheConsole implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello there ! Tu veux quelle geocache bg ?");
-        String id = scanner.nextLine();
+        int id = scanner.nextInt();
 
-        Request request = cacheService.testFindCacheById(id);
+        Request request = cacheService.testAddCaches(id);
         System.out.println(request.toString());
 
     }

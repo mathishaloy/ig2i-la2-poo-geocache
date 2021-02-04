@@ -5,7 +5,9 @@ import ig2i.la2.poo.geocache.domain.cache.CacheRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -21,4 +23,11 @@ public class CacheRepositoryImpl implements CacheRepository {
                 .orElse(null);
 
     }
+
+    @Override
+    public void saveAll(List<Cache> caches) {
+        cacheJpaRepository.saveAll(caches.stream().map(CacheEntityMapper::toEntity).collect(Collectors.toList()));
+    }
+
+
 }

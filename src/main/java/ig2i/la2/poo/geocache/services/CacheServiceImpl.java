@@ -11,6 +11,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +41,35 @@ public class CacheServiceImpl implements CacheService {
         return Request.builder()
                 .launchTime(launch)
                 .result(caches)
+                .endTime(end)
+                .build();
+    }
+
+    @Override
+    public Request testAddCaches(int number) {
+
+        LocalDateTime launch;
+        LocalDateTime end;
+        List<String> messages = new ArrayList<>();
+
+        List<Cache> caches = Stream.generate(() -> Cache.builder()
+                .id(UUID.randomUUID().toString())
+                .lieu("Lens, rue Jean Souvraz")
+                .latitude(50.43498770435874f)
+                .longitude(2.8234892199924206f)
+                .build())
+                .limit(number)
+                .collect(Collectors.toList());
+
+        launch = LocalDateTime.now();
+        cacheRepository.saveAll(caches);
+        end = LocalDateTime.now();
+
+        messages.add(number + " Cache(s) succefully created.");
+
+        return Request.builder()
+                .launchTime(launch)
+                .result(messages)
                 .endTime(end)
                 .build();
     }

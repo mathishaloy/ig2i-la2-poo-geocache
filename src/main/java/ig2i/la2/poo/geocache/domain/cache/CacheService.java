@@ -8,4 +8,6 @@ public interface CacheService {
 
     Request testFindCacheById(String id);
 
+    Request testAddCaches(int number);
+
 }
