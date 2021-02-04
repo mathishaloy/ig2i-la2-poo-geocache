@@ -31,11 +31,17 @@ Notre projet possède l'arborescence suivante :
 │   ├───utilisateur
 │   └───visite
 ├───infrastructure
+│   ├───mock
+│   │   └───cache
+│   ├───mongodb
+│   │   ├───cache
+│   │   └───utilisateur
 │   └───mysql
 │       ├───cache
 │       ├───utilisateur
 │       └───visite
 └───services
+
 ```
 Le package `application` contient les classes de présentation et d'interface console. Celles-ci utilisent des implémentations de `services` contenues dans le package du même nom.
 Ces services implémentes des interfaces du `domain`, le quel contient également nos classes métiers et la définition des interfaces de repository. Les `services` utilisent ces repository qui sonbt implémentés dans le package `infrastructure`.
