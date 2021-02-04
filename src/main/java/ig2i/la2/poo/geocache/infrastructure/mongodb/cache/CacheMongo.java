@@ -3,6 +3,7 @@ package ig2i.la2.poo.geocache.infrastructure.mongodb.cache;
 import ig2i.la2.poo.geocache.domain.cache.Etat;
 import ig2i.la2.poo.geocache.domain.cache.Nature;
 import ig2i.la2.poo.geocache.domain.cache.Type;
+import ig2i.la2.poo.geocache.infrastructure.mongodb.utilisateur.UtilisateurMongo;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -22,4 +23,6 @@ public class CacheMongo {
     private Type type;
     private Nature nature;
     private Etat etat;
+
+    private UtilisateurMongo proprietaire;
 }

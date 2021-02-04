@@ -31,6 +31,6 @@ public class CacheRepositoryImplMongo implements CacheRepository {
 
     @Override
     public List<Cache> findAll() {
-        return null;
+        return cacheMongoRepository.findAll().stream().map(CacheMongoMapper::toDomain).collect(Collectors.toList());
     }
 }

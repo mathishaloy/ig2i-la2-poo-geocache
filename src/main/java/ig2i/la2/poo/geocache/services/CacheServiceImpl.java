@@ -4,6 +4,7 @@ import ig2i.la2.poo.geocache.domain.Request;
 import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.domain.cache.CacheRepository;
 import ig2i.la2.poo.geocache.domain.cache.CacheService;
+import ig2i.la2.poo.geocache.domain.utilisateur.Utilisateur;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +75,12 @@ public class CacheServiceImpl implements CacheService {
                 .lieu("Lens, rue Jean Souvraz")
                 .latitude(50.43498770435874f)
                 .longitude(2.8234892199924206f)
+                .proprietaire(Utilisateur.builder()
+                        .id(UUID.randomUUID().toString())
+                        .description("Awesome piss of code")
+                        .pseudo("Francis")
+                        .photo("*grimace*")
+                        .build())
                 .build())
                 .limit(number)
                 .collect(Collectors.toList());
@@ -83,6 +90,7 @@ public class CacheServiceImpl implements CacheService {
         end = LocalDateTime.now();
 
         messages.add(number + " Cache(s) succefully created.");
+        messages.add(caches.stream().map(Cache::getId).collect(Collectors.joining("-", "{", "}")));
 
         return Request.builder()
                 .launchTime(launch)
