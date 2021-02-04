@@ -8,4 +8,5 @@ public interface CacheRepository {
 
     void saveAll(List<Cache> caches);
 
+    List<Cache> findAll();
 }
