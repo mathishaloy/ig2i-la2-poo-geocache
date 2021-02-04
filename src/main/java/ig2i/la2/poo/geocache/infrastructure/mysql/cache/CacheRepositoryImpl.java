@@ -3,6 +3,7 @@ package ig2i.la2.poo.geocache.infrastructure.mysql.cache;
 import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.domain.cache.CacheRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
+@Profile("mariadb")
 public class CacheRepositoryImpl implements CacheRepository {
 
     private final CacheJpaRepository cacheJpaRepository;
