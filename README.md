@@ -7,7 +7,15 @@ A la racine du projet :
 
 ```bash
 mvn clean install
+```
+Pour lancer l'application mocké (Fonctionelle sans base de données)
+```bash
 java -jar target/*.jar
+```
+Pour lancer l'application avec un SGBD particulier
+```bash
+java -jar target/*.jar -Dspring.profiles.active=mariadb
+java -jar target/*.jar -Dspring.profiles.active=mongodb
 ```
 
 ## Architecture
