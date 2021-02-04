@@ -90,7 +90,7 @@ public class CacheServiceImpl implements CacheService {
         end = LocalDateTime.now();
 
         messages.add(number + " Cache(s) succefully created.");
-        messages.add(caches.stream().map(Cache::getId).collect(Collectors.joining("-", "{", "}")));
+        messages.add(caches.stream().map(Cache::getId).collect(Collectors.joining(", ", "[", "]")));
 
         return Request.builder()
                 .launchTime(launch)
