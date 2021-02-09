@@ -2,8 +2,10 @@ package ig2i.la2.poo.geocache.infrastructure.mongodb.cache;
 
 import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.infrastructure.mongodb.utilisateur.UtilisateurMongoMapper;
+import ig2i.la2.poo.geocache.infrastructure.mongodb.visite.VisiteMongoMapper;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public abstract class CacheMongoMapper {
 
@@ -18,6 +20,9 @@ public abstract class CacheMongoMapper {
                 .type(mongo.getType())
                 .proprietaire(Optional.ofNullable(mongo.getProprietaire())
                         .map(UtilisateurMongoMapper::toDomain).orElse(null))
+                .visites(mongo.getVisites().stream()
+                        .map(VisiteMongoMapper::toDomain)
+                        .collect(Collectors.toList()))
                 .build();
     }
 
@@ -31,7 +36,10 @@ public abstract class CacheMongoMapper {
                 .nature(cache.getNature())
                 .type(cache.getType())
                 .proprietaire(Optional.ofNullable(cache.getProprietaire())
-                    .map(UtilisateurMongoMapper::toMongo).orElse(null))
+                        .map(UtilisateurMongoMapper::toMongo).orElse(null))
+                .visites(cache.getVisites().stream()
+                        .map(VisiteMongoMapper::toMongo)
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

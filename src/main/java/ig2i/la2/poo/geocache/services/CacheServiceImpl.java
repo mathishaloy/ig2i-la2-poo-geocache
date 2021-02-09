@@ -5,6 +5,7 @@ import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.domain.cache.CacheRepository;
 import ig2i.la2.poo.geocache.domain.cache.CacheService;
 import ig2i.la2.poo.geocache.domain.utilisateur.Utilisateur;
+import ig2i.la2.poo.geocache.domain.visite.Visite;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -81,6 +82,19 @@ public class CacheServiceImpl implements CacheService {
                         .pseudo("Francis")
                         .photo("*grimace*")
                         .build())
+                .visites(Stream.of(
+                        Visite.builder()
+                                .id(UUID.randomUUID().toString())
+                                .photo("*sourir*")
+                                .date(LocalDateTime.now())
+                                .commentaire("Une belle visite.")
+                                .build(),
+                        Visite.builder()
+                                .photo("*pas sourir*")
+                                .date(LocalDateTime.now())
+                                .commentaire("Une belle visite.")
+                                .build()
+                ).collect(Collectors.toList()))
                 .build())
                 .limit(number)
                 .collect(Collectors.toList());
