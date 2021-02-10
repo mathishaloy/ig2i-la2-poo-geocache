@@ -32,6 +32,12 @@ public class CacheRepositoryImpl implements CacheRepository {
     }
 
     @Override
+    public void save(Cache cache) {
+        Optional.ofNullable(cache).ifPresent(cacheToSave ->
+                cacheJpaRepository.save(CacheEntityMapper.toEntity(cacheToSave)));
+    }
+
+    @Override
     public List<Cache> findAll() {
         return cacheJpaRepository.findAll().stream().map(CacheEntityMapper::toDomain).collect(Collectors.toList());
     }

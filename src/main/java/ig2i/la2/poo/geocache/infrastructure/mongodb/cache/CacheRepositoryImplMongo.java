@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -16,6 +17,10 @@ public class CacheRepositoryImplMongo implements CacheRepository {
 
     private final CacheMongoRepository cacheMongoRepository;
 
+    @Override
+    public List<Cache> findAll() {
+        return cacheMongoRepository.findAll().stream().map(CacheMongoMapper::toDomain).collect(Collectors.toList());
+    }
 
     @Override
     public Cache findCacheById(String id) {
@@ -30,7 +35,8 @@ public class CacheRepositoryImplMongo implements CacheRepository {
     }
 
     @Override
-    public List<Cache> findAll() {
-        return cacheMongoRepository.findAll().stream().map(CacheMongoMapper::toDomain).collect(Collectors.toList());
+    public void save(Cache cache) {
+        Optional.ofNullable(cache).ifPresent(cacheToSave ->
+                cacheMongoRepository.save(CacheMongoMapper.toMongo(cacheToSave)));
     }
 }
