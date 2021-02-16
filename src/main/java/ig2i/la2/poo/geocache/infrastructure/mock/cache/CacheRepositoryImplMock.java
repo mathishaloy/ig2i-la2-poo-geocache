@@ -34,6 +34,11 @@ public class CacheRepositoryImplMock implements CacheRepository {
     }
 
     @Override
+    public void save(Cache caches) {
+
+    }
+
+    @Override
     public List<Cache> findAll() {
         log.warn("/!\\ CacheRepository is mocked /!\\");
         return Stream.generate(() -> Cache.builder()
