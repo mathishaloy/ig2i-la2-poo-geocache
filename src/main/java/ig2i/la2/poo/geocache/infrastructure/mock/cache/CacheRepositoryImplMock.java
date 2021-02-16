@@ -2,7 +2,6 @@ package ig2i.la2.poo.geocache.infrastructure.mock.cache;
 
 import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.domain.cache.CacheRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
@@ -13,7 +12,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Repository
-@RequiredArgsConstructor
 @Profile("mockdb")
 @Slf4j
 public class CacheRepositoryImplMock implements CacheRepository {

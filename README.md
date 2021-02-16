@@ -14,8 +14,8 @@ java -jar target/*.jar
 ```
 Pour lancer l'application avec un SGBD particulier
 ```bash
-java -jar target/*.jar -Dspring.profiles.active=mariadb
-java -jar target/*.jar -Dspring.profiles.active=mongodb
+java -Dspring.profiles.active=mariadb -jar target/*.jar
+java -Dspring.profiles.active=mongodb -jar target/*.jar
 ```
 
 ## Architecture
