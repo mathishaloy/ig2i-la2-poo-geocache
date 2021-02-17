@@ -1,4 +1,4 @@
-package ig2i.la2.poo.geocache.infrastructure.mock.cache;
+package ig2i.la2.poo.geocache.infrastructure.mock;
 
 import ig2i.la2.poo.geocache.domain.cache.Cache;
 import ig2i.la2.poo.geocache.domain.cache.CacheRepository;

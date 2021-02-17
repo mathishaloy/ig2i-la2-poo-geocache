@@ -30,6 +30,13 @@ public class UtilisateurRepositoryImpl implements UtilisateurRepository {
     }
 
     @Override
+    public void saveAll(List<Utilisateur> utilisateurs) {
+        utilisateurJpaRepository.saveAll(utilisateurs.stream()
+                .map(UtilisateurMapper::toEntity)
+                .collect(Collectors.toList()));
+    }
+
+    @Override
     public List<Utilisateur> findAll() {
         return utilisateurJpaRepository.findAll().stream()
                 .map(UtilisateurMapper::toDomain)

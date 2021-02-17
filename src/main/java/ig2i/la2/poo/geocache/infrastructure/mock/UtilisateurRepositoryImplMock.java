@@ -28,6 +28,11 @@ public class UtilisateurRepositoryImplMock implements UtilisateurRepository {
     }
 
     @Override
+    public void saveAll(List<Utilisateur> utilisateurs) {
+        log.warn("/!\\ UtilisateurRepository is mocked /!\\");
+    }
+
+    @Override
     public List<Utilisateur> findAll() {
         log.warn("/!\\ UtilisateurRepository is mocked /!\\");
         return Collections.emptyList();

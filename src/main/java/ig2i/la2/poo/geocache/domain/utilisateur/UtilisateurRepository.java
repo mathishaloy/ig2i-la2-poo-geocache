@@ -8,6 +8,8 @@ public interface UtilisateurRepository {
 
     void save(Utilisateur utilisateur);
 
+    void saveAll(List<Utilisateur> utilisateurs);
+
     List<Utilisateur> findAll();
 
 }
