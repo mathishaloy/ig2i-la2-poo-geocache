@@ -17,6 +17,17 @@ Pour lancer l'application avec un SGBD particulier
 java -Dspring.profiles.active=mariadb -jar target/*.jar
 java -Dspring.profiles.active=mongodb -jar target/*.jar
 ```
+## Utilisation
+L'interaction se fait en lignes de commandes :
+```
+[entité] [action] [option]
+```
+Exemples :
+```
+cache get aca2d4d4-06ea-4a7f-bc10-0871e84a5c44
+utilisateur get all
+visite add 1
+```
 
 ## Architecture
 
@@ -32,7 +43,9 @@ Notre projet possède l'arborescence suivante :
 │   └───visite
 ├───infrastructure
 │   ├───mock
-│   │   └───cache
+│   │   ├───cache
+│   │   └───utilisateur
+│   │   ├───visite
 │   ├───mongodb
 │   │   ├───cache
 │   │   └───utilisateur
