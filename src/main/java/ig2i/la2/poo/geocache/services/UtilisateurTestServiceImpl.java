@@ -47,7 +47,7 @@ public class UtilisateurTestServiceImpl implements UtilisateurTestService {
         return Request.builder()
                 .launchTime(launchTime)
                 .result(Stream.of(String.format(
-                        "%d utilisateur successfully created", utilisateurs.size()),
+                        "%d utilisateurs successfully created", utilisateurs.size()),
                         utilisateurs.stream().map(Utilisateur::getId).collect(Collectors.joining(", ", "[", "]")))
                         .collect(Collectors.toList()))
                 .endTime(endTime)

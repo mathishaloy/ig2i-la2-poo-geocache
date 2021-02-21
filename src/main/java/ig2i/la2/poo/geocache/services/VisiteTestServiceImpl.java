@@ -47,7 +47,7 @@ public class VisiteTestServiceImpl implements VisiteTestService {
         return Request.builder()
                 .launchTime(launchTime)
                 .result(Stream.of(String.format(
-                        "%d utilisateur successfully created", visites.size()),
+                        "%d visites successfully created", visites.size()),
                         visites.stream().map(Visite::getId).collect(Collectors.joining(", ", "[", "]")))
                         .collect(Collectors.toList()))
                 .endTime(endTime)
